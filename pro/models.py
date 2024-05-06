@@ -1,9 +1,5 @@
-#from django.db import models
-from djongo import models
+from django.db import models
+from db_connect import db
+# Create your models here.
 
-class MyModel(models.Model):
-    field1 = models.CharField(max_length=100)
-    field2 = models.CharField(max_length=500)
-    
-    class Meta:
-        db_table = 'mydata' 
+our_collection = db['pro']
