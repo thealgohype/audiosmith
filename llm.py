@@ -11,8 +11,15 @@ from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 import os
 
+load_dotenv()
 
-load_dotenv()  # Load environment variables from .env file
+lc_key= os.getenv('lc_key')
+
+# Setup LANGSMITH for LLMOps :
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_PROJECT"] = "audiosmith"
+os.environ["LANGCHAIN_ENDPOINT"] = "https://api.smith.langchain.com"
+os.environ["LANGCHAIN_API_KEY"] = lc_key
 
 def LLMChain(model_name: str, query: str) -> str:
     """
@@ -56,4 +63,3 @@ def LLMChain(model_name: str, query: str) -> str:
     # 5. Run the chain and return the output
     output = chain.invoke({"question": query})
     return output
-
