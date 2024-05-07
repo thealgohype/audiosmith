@@ -10,9 +10,10 @@ from llm import LLMChain
 from rest_framework.response import Response
 from django.core import serializers
 from django.db import connection
+from datetime import datetime
 
 def index(request):
-    return HttpResponse('ITS Running')
+    return HttpResponse('This website is running to produce API')
 
 @csrf_exempt
 @api_view(['POST','GET'])
@@ -23,7 +24,9 @@ def add_test(request):
         text_data = data.get('text')
         
         res1 = LLMChain(llm_text, text_data)
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         data = {
+            'Time_Initiated': timestamp,
             'LLM_type': llm_text,
             'input_text': text_data,
             'AI_text' : res1
@@ -38,16 +41,20 @@ def add_test(request):
                    
         return JsonResponse({'data1':data},status=200)
         
-    return JsonResponse({'error': 'Invalid request method'}, status=400)  
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
 
-#    elif request.method == 'GET':
-#        val = our_collection.find().sort('_id', -1).limit(1)
-#        data = []
-#        for row in val:
-#            # Convert ObjectId to string
-#            row['_id'] = str(row['_id'])
-#            data.append(row)
-#        return JsonResponse({'data':data},status=200)
+@csrf_exempt
+@api_view(['DELETE'])
+def delete_all_records(request):
+    if request.method == 'DELETE':
+        result = our_collection.delete_many({})
+        
+        if result.deleted_count > 0:
+                return JsonResponse({'message': f'{result.deleted_count} records deleted successfully'},status = 200)
+        else:
+            return JsonResponse({'message': 'No records found to delete'},status = 200)
+        
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
     
   
         
