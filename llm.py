@@ -39,11 +39,11 @@ def LLMChain(model_name: str, query: str) -> str:
     elif model_name == "gpt-4":
         llm = ChatOpenAI(model="gpt-4-turbo-2024-04-09", temperature=0.7, api_key=os.getenv('OAI_API_KEY'))
     elif model_name == "claude-sonnet":
-        llm = ChatAnthropic(model="claude-3-sonnet-20240229",temperature=0.7, api_key=os.getenv('CLAUDE_API_KEY'))
+        llm = ChatAnthropic(model="claude-3-sonnet-20240229",temperature=0.7, anthropic_api_key=os.getenv('CLAUDE_API_KEY'))
     elif model_name == "claude-opus":
-        llm = ChatAnthropic(model="claude-3-opus-20240229", temperature=0.7, api_key=os.getenv('CLAUDE_API_KEY'))
+        llm = ChatAnthropic(model="claude-3-opus-20240229", temperature=0.7, anthropic_api_key=os.getenv('CLAUDE_API_KEY'))
     elif model_name == "google-gemini":
-        llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.7, api_key=os.getenv('GEMINI_API_KEY'))
+        llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.7, gogole_api_key=os.getenv('GEMINI_API_KEY'))
     elif model_name == "llama3-groq":
         llm = ChatGroq(model="llama3-70b-8192", temperature=0.7, groq_api_key=os.getenv('GROQ_API_KEY'))
     else:
@@ -63,5 +63,3 @@ def LLMChain(model_name: str, query: str) -> str:
     # 5. Run the chain and return the output
     output = chain.invoke({"question": query})
     return output
-
-    
