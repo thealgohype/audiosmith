@@ -1,0 +1,25 @@
+.side-container {
+    position: relative;
+}
+
+.side {
+    width: 50px; /* Default width */
+    transition: width 0.5s;
+}
+
+.side-open {
+    width: 200px; /* Expanded width */
+}
+
+.side-closed {
+    width: 50px; /* Collapsed width */
+}
+
+.add_icon_div, .below-icons {
+    display: none; /* Hide when collapsed */
+}
+
+.side-open .add_icon_div, 
+.side-open .below-icons {
+    display: block; /* Show when expanded */
+}
