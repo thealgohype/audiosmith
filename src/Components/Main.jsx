@@ -38,9 +38,9 @@ export const Main = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [chatStarted, setChatStarted] = useState(false);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  // };
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView();
